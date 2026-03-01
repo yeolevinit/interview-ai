@@ -1,0 +1,116 @@
+# Interview-AI
+
+An AI-powered full-stack application that analyzes a candidate's profile (resume and self-description) against a given job description to generate a highly personalized interview preparation plan and a tailored ATS-friendly resume. 
+
+---
+
+## 🚀 Features
+
+### **1. AI-Powered Interview Preparation Strategy**
+Provides a thorough, tailor-made strategy leveraging the **Google GenAI (Gemini)** model based on the user's uploaded resume (PDF/DOCX) or self-description against a specified job description.
+- **Technical Questions:** Specific questions the candidate might face based on the job requirements, complete with the interviewer's intention and a model answer.
+- **Behavioral Questions:** Soft skills evaluation points with deep insights on how to handle them.
+- **Preparation Roadmap:** A comprehensive, day-by-day customized learning and task roadmap (e.g., studying system design, practicing algorithms).
+- **Match Score & Skill Gaps Analysis:** Provides a score out of 100 on how well the candidate matches the job description. Highlights identified skill gaps categorized by their severity to the application.
+
+### **2. AI Resume Generator**
+- Generates a brand-new, tailor-made, ATS-friendly resume matching the targeted job description.
+- Crafts high-quality, human-sounding content emphasizing the candidate's strongest, most relevant experience.
+- Exportable directly as a beautifully structured PDF document using **Puppeteer**.
+
+### **3. User Dashboard & History**
+- Saves previous interview plans to the user's dashboard.
+- Users can revisit their past queries quickly to see their timeline, scores, and past job targets.
+
+### **4. Secure Authentication**
+- Robust User Authentication system featuring JWTs (JSON Web Tokens).
+- Secure password hashing using **bcrypt**.
+- Safe session control utilizing HTTP-only cookies and token blacklisting for safe logouts.
+
+---
+
+## 🛠️ Technology Stack
+
+### **Frontend**
+- **React.js 19** with **Vite**: Ultra-fast module bundling and React frontend rendering.
+- **React Router (v7)**: Navigation and private/protected route handling.
+- **Axios**: Promised-based HTTP client for backend communication.
+- **SCSS (Sass)**: Feature-rich styling, responsive layouts, and beautifully crafted UI mimicking modern premium applications.
+
+### **Backend**
+- **Node.js** & **Express.js (v5)**: Fast, non-blocking REST API server.
+- **MongoDB** with **Mongoose**: NoSQL database for flexible data storage including user accounts and rich JSON interview reports.
+- **Google GenAI SDK (Gemini)**: Leverages `gemini-3-flash-preview` for high-speed, intelligent generation of reports and HTML resumes.
+- **Zod & Zod-to-JSON-Schema**: For structurally parsing AI responses strictly to expected JSON payload formats ensuring data consistency.
+- **Puppeteer**: Headless browser automation effectively used here for rendering the AI HTML resume into an A4 PDF.
+- **PDF-Parse & Multer**: Handles incoming multipart file streams and correctly parses PDF data from candidates' existing resumes.
+- **JWT & bcryptjs**: End-to-end authentication safeguarding.
+
+---
+
+## 📁 Project Structure
+
+### Frontend (`/Frontend`)
+- `src/features/auth/`: React components and pages managing Login & Registration.
+- `src/features/interview/`: Core dashboard (`Home.jsx`) and detailed interview plan viewer (`Interview.jsx`).
+- `src/style/`: Main SCSS stylesheets to curate the aesthetic of the app.
+
+### Backend (`/Backend`)
+- `src/controllers/`: Logic connecting routes, database models, and external services.
+- `src/models/`: Mongoose schemas defining MongoDB collections (`User`, `InterviewReport`, `Blacklist`).
+- `src/routes/`: Express router files handling API route structures (`/api/auth`, `/api/interview`).
+- `src/services/ai.service.js`: The central intelligent hub configuring the Google Gemini interactions and managing prompts, along with Puppeteer PDF generation.
+- `src/middlewares/`: Auth validators and Multer file validators.
+
+---
+
+## ⚡ Getting Started
+
+### Prerequisites
+- Node.js installed
+- MongoDB URI
+- Google Gemini API Key
+
+### Installation
+
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/your-username/interview-ai.git
+   ```
+
+2. **Backend Setup:**
+   ```bash
+   cd Backend
+   npm install
+   ```
+   Create a `.env` file in the Backend directory containing:
+   ```env
+   PORT=...
+   MONGODB_URI=...
+   JWT_SECRET=...
+   GOOGLE_GENAI_API_KEY=...
+   ```
+   Start the backend server:
+   ```bash
+   npm run dev
+   ```
+
+3. **Frontend Setup:**
+   ```bash
+   cd Frontend
+   npm install
+   ```
+   Start the Vite development server:
+   ```bash
+   npm run dev
+   ```
+
+---
+
+## 🎯 Next Steps / Potential Optimizations
+- Caching logic to speed up redundant requests if generated previously.
+- Implement rate limiting (e.g., `express-rate-limit`) to avoid abusing Gemini AI token limits. 
+- Extend the AI to conduct a live voice interview acting as a virtual HR!
+
+---
+*Generated by the Interview-AI team.*
